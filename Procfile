@@ -1,1 +1,0 @@
-web: gunicorn dms.wsgi --log-file -
