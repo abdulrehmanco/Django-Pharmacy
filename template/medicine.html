@@ -1,0 +1,167 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}Medicines{%endblock title %} 
+{% block body %}
+
+<div class="conatiner-fluid py-4">
+  
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6>Medicines     
+            <i class="fa fa-plus mx-1 " data-toggle="modal" data-target="#btyn"></i>              
+          </h6>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th
+                    class="text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                    NAME
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xs font-weight-bolder opacity-10 ps-2">
+                    Supplier
+                  </th>
+                  <th
+                    class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                    Desciption
+                  </th>
+                  <th
+                    class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                    Stock
+                  </th>
+                  <th
+                    class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                    Sell Price
+                  </th>
+                  <th
+                    class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                    Buy Price
+                  </th>
+                  <th
+                    class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                    Shelf No
+                  </th>
+                  <th
+                    class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                    Added On
+                  </th>
+                  <th>
+
+                  </th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {% for med in medi %}
+                <tr>
+                  <td class="align-middle text-center text-sm">
+                      
+                        <h6 class="mb-0 text-xs">{{med.name}}</h6>
+                      
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    
+                        <h6 class="mb-0  text-xs">{{med.company_id}}</h6>  
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                      
+                        <h6 class="mb-0 text-xs">{{med.desc}}</h6>
+                      
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    
+                        <h6 class="mb-0 text-xs">{{med.in_stock}}</h6>
+                      
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    
+                        <h6 class="mb-0 text-xs">{{med.sell_price}}</h6>
+                      
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    
+                        <h6 class="mb-0 text-xs">{{med.buy_price}}</h6>
+                      
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    
+                        <h6 class="mb-0 text-xs">{{med.shelf_no}}</h6>
+                      
+                  </td>
+                  <td>
+                    
+                        <h6 class="mb-0 text-xs">{{med.added_on}}</h6>
+                      
+                  </td>
+                  <td>
+                    <div class="ms-auto text-end">
+                      <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="{% url 'mad_delete' med.id  %}"><i class="far fa-trash-alt me-2" aria-hidden="true"></i>Delete</a>
+                      <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                    </div>
+                  </td>
+                 
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="btyn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Medicine</h5>
+      </div>
+      <div class="modal-body">
+        <form role="form text-left" method="post" action="medicines">
+          {% csrf_token %}
+        <div class="mb-3">
+          <input type="text" class="form-control" name='name' placeholder="Name" aria-label="Name" aria-describedby="email-addon"required>
+        </div>
+        <div class="mb-3">
+          <select class="form-control" name="company_id" required>
+              {%for cm in company_id %}
+              <option value="{{cm.id}}">{{cm.name}}</option>
+              {%endfor%}
+          </select>
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" name='desc'placeholder="Desciption" aria-label="Desciption" aria-describedby="email-addon"required>
+        </div>
+        <div class="mb-3">
+          <input type="integer" class="form-control" name='sell_price'placeholder="Sell_Price" aria-label="Sell Price" aria-describedby="email-addon"required>
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" name='buy_price'placeholder="Buy_Price" aria-label="Buy Price" aria-describedby="email-addon"required>
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" name='in_stock'placeholder="Stock" aria-label="Stock" aria-describedby="email-addon"required>
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control"name='shelf_no' placeholder="Shelf" aria-label="Shelf" aria-describedby="email-addon"required>
+        </div>
+        <div class="mb-3">
+          <input type="date" class="form-control"name='added_on' placeholder="Date" aria-label="Date" aria-describedby="email-addon"required>
+        </div>
+        
+        
+        <div class="text-center">
+          <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
+        </div>
+        
+        </form>
+    </div>
+  </div>
+</div>
+{% endblock body %}
+
+
+

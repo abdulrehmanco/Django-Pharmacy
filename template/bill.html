@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Recipt{% endblock title %}
+{% block body %}
+<div class="conatiner-fluid py-4">
+  
+   <!--Posting Section-->
+  <div class="col-12">
+    <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6>Generate Recipt </h6>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+                <div class="card-body">
+                    <form role="form text-left" method="post" action="recipt">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <select class="form-control" name="medicine_id" required>
+                                {%for cm in medicine_id %}
+                                <option value="{{cm.id}}">{{cm.name}}</option>
+                                {%endfor%}
+                            </select>
+                          </div>
+                      <div class="mb-3">
+                        <input type="integer" class="form-control" name='qty'placeholder="Quantity" aria-label="Desciption" aria-describedby="email-addon"required>
+                      </div>
+                      <div class="mb-3">
+                        <input type="date" class="form-control" name='added_on' placeholder="added_on" aria-label="Desciption" aria-describedby="email-addon"required>
+                      </div>
+                      <div class="text-center">
+                        <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
+                      </div>
+                      
+                    </form>
+                  </div>
+            </table>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>
+
+{% endblock body %}
