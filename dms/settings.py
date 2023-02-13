@@ -72,7 +72,7 @@ DATABASES={
       'NAME':'postgres',
       'USER':'postgres',
       'PASSWORD':'admin123',
-      'HOST':'django-pharmacy.vercel.app',
+      'HOST':'localhost',
       'PORT':'5432',
    }
 }
