@@ -72,7 +72,7 @@ DATABASES={
       'NAME':'postgres',
       'USER':'postgres',
       'PASSWORD':'admin123',
-      'HOST':'localhost',
+      'HOST':'.vercel.app',
       'PORT':'5432',
    }
 }
